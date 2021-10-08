@@ -11,9 +11,10 @@ namespace HospiEnCasa.App.Consola
         private static IRepositorioPaciente _repoPaciente = new RepositorioPaciente(new Persistencia.AppContext());
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World EF!");
-            ListarPacientesCorazon();
-            
+            Console.WriteLine("Hello World EF!------------");
+            ListarSignosPaciente(5);
+            //ListarPacientesCorazon();
+            //ListarPacientesFiltro();   
             //ListarPacientesMasculinos();
             //AddSignosPaciente(2);
             //AddPacienteConSignos();             
@@ -109,6 +110,15 @@ namespace HospiEnCasa.App.Consola
 
         }
 
+        private static void ListarPacientesFiltro()
+        {
+            var pacientesM = _repoPaciente.GetPacientesPorFiltro("Y");
+            foreach (Paciente p in pacientesM)
+            {
+                Console.WriteLine(p.Nombre + " " + p.Apellidos);
+            }
+
+        }
         private static void ListarPacientesCorazon()
         {
             var pacientesH = _repoPaciente.GetPacientesCorazon();
@@ -116,6 +126,24 @@ namespace HospiEnCasa.App.Consola
             {
                 Console.WriteLine(p.Nombre + " " + p.Apellidos);
             }
+
+        }
+
+        private static void ListarSignosPaciente(int idPaciente)
+        {
+            var signos = _repoPaciente.GetSignosPaciente(idPaciente);
+            if (signos != null)
+            {
+                foreach (SignoVital s in signos)
+                {
+                    Console.WriteLine(s.Valor);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No registra signos");
+            }
+
 
         }
 

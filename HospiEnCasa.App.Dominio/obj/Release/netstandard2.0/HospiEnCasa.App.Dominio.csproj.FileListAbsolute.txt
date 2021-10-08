@@ -1,0 +1,9 @@
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\bin\Release\netstandard2.0\HospiEnCasa.App.Dominio.deps.json
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\bin\Release\netstandard2.0\HospiEnCasa.App.Dominio.dll
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\bin\Release\netstandard2.0\HospiEnCasa.App.Dominio.pdb
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\obj\Release\netstandard2.0\HospiEnCasa.App.Dominio.csprojAssemblyReference.cache
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\obj\Release\netstandard2.0\HospiEnCasa.App.Dominio.AssemblyInfoInputs.cache
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\obj\Release\netstandard2.0\HospiEnCasa.App.Dominio.AssemblyInfo.cs
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\obj\Release\netstandard2.0\HospiEnCasa.App.Dominio.csproj.CoreCompileInputs.cache
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\obj\Release\netstandard2.0\HospiEnCasa.App.Dominio.dll
+C:\MisionTIC-2021-Ciclo3-BD\HospiEnCasa.App.Dominio\obj\Release\netstandard2.0\HospiEnCasa.App.Dominio.pdb

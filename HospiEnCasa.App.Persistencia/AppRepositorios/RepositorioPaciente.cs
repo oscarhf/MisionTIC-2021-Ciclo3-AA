@@ -1,7 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HospiEnCasa.App.Dominio;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospiEnCasa.App.Persistencia
 {
@@ -23,7 +24,7 @@ namespace HospiEnCasa.App.Persistencia
         }
 
 
-        Paciente IRepositorioPaciente.AddPaciente(Paciente paciente)
+        public Paciente AddPaciente(Paciente paciente)
         {
             var pacienteAdicionado = _appContext.Pacientes.Add(paciente);
             _appContext.SaveChanges();
@@ -31,7 +32,7 @@ namespace HospiEnCasa.App.Persistencia
 
         }
 
-        void IRepositorioPaciente.DeletePaciente(int idPaciente)
+        public void DeletePaciente(int idPaciente)
         {
             var pacienteEncontrado = _appContext.Pacientes.FirstOrDefault(p => p.Id == idPaciente);
             if (pacienteEncontrado == null)
@@ -40,17 +41,36 @@ namespace HospiEnCasa.App.Persistencia
             _appContext.SaveChanges();
         }
 
-        IEnumerable<Paciente> IRepositorioPaciente.GetAllPacientes()
+       public IEnumerable<Paciente> GetAllPacientes()
+        {
+            return GetAllPacientes_();
+        }
+        public IEnumerable<Paciente> GetPacientesPorFiltro(string filtro)
+        {
+            var pacientes = GetAllPacientes(); // Obtiene todos los saludos
+            if (pacientes != null)  //Si se tienen saludos
+            {
+                if (!String.IsNullOrEmpty(filtro)) // Si el filtro tiene algun valor
+                {
+                    pacientes = pacientes.Where(s => s.Nombre.Contains(filtro));
+                }
+
+            }
+            return pacientes;
+
+        }
+
+        public IEnumerable<Paciente> GetAllPacientes_()
         {
             return _appContext.Pacientes;
         }
 
-        Paciente IRepositorioPaciente.GetPaciente(int idPaciente)
+        public Paciente GetPaciente(int idPaciente)
         {
             return _appContext.Pacientes.FirstOrDefault(p => p.Id == idPaciente);
         }
 
-        Paciente IRepositorioPaciente.UpdatePaciente(Paciente paciente)
+        public Paciente UpdatePaciente(Paciente paciente)
         {
             var pacienteEncontrado = _appContext.Pacientes.FirstOrDefault(p => p.Id == paciente.Id);
             if (pacienteEncontrado != null)
@@ -76,7 +96,7 @@ namespace HospiEnCasa.App.Persistencia
             return pacienteEncontrado;
         }
 
-        Medico IRepositorioPaciente.AsignarMedico(int idPaciente, int idMedico)
+        public Medico AsignarMedico(int idPaciente, int idMedico)
         {
             var pacienteEncontrado = _appContext.Pacientes.FirstOrDefault(p => p.Id == idPaciente);
             if (pacienteEncontrado != null)
@@ -92,19 +112,26 @@ namespace HospiEnCasa.App.Persistencia
             return null;
         }
 
-        IEnumerable<Paciente> IRepositorioPaciente.GetPacientesMasculinos()
+        public IEnumerable<Paciente> GetPacientesMasculinos()
         {
 
-            return _appContext.Pacientes.Where(p => p.Genero == Genero.Masculino).ToList();
+            return _appContext.Pacientes.Where(p => p.Genero == Genero.Masculino).ToList();        }
 
-        }
-
-        public IEnumerable<Paciente> GetPacientesCorazon()
+        IEnumerable<Paciente> IRepositorioPaciente.GetPacientesCorazon()
         {
 
             return _appContext.Pacientes
-                                   .Where(p => p.SignosVitales.Any(s =>  TipoSigno.FrecuenciaCardica==s.Signo && s.Valor >=90))
+                                   .Where(p => p.SignosVitales.Any(s => TipoSigno.FrecuenciaCardica == s.Signo && s.Valor >= 90))
                                    .ToList();
-        } 
+        }
+
+        IEnumerable<SignoVital> IRepositorioPaciente.GetSignosPaciente(int idPaciente)
+        {
+            var paciente = _appContext.Pacientes.Where(s => s.Id==idPaciente)
+                                               .Include(s=>s.SignosVitales)
+                                               .FirstOrDefault();
+
+            return paciente.SignosVitales;
+        }
     }
 }

@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin\\Release\\net5.0\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/f0851794-ff70-4c33-81ce-2026f4affc49/resourceGroups/MisionTIC2022/providers/Microsoft.Web/sites/HospiCasa001"
+}
